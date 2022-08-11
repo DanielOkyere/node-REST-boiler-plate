@@ -48,5 +48,5 @@ npm run migrate:down
 
 - Node JS
 - Express
-- Postgres
+- MongoDB
 - Redis

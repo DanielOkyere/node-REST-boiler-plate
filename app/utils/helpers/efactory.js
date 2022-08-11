@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import ApiError from '../errors/api.error';
 import constants from '../constants';
 

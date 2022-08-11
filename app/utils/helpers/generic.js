@@ -1,10 +1,10 @@
+/* istanbul ignore file */
 import axios from 'axios';
 import { nanoid } from 'nanoid';
 import genericError from '../errors/generic';
 import constants from '../constants';
 import DBError from '../errors/db.error';
 import ModuleError from '../errors/module.error';
-import db from '../../db';
 
 const { serverError } = genericError;
 const { FAIL, SUCCESS, SUCCESS_RESPONSE } = constants;
@@ -107,38 +107,6 @@ class GenericHelper {
     logger.error(
       `${error.name} - ${error.status} - ${error.message} - ${req.originalUrl} - ${req.method} - ${req.ip}`
     );
-  }
-
-  /**
-   * Fetches a pagination collection of a resource.
-   * @static
-   * @param {Object} options - configuration options.
-   * @param {number} options.page - Current page e.g: 1 represents first
-   * 30 records by default and 2 represents the next 30 records.
-   * @param {number} options.limit - Max number of records.
-   * @param {number} options.getCount - Max number of records.
-   * @param {number} options.getResources - Max records in the current page
-   * @param {Array} options.params - Extra parameters for the get resources query.
-   * @param {Array} options.countParams - Extra parameters for the get count query.
-   * @memberof GenericHelper
-   * @returns {Promise} - Returns a promise array of the count and the resources
-   */
-  static async fetchResourceByPage({
-    page,
-    limit,
-    getCount,
-    getResources,
-    params = [],
-    countParams = []
-  }) {
-    const offSet = (page - 1) * +limit;
-    const fetchCount = db.one(getCount, [...countParams]);
-    const fetchCountResource = db.any(getResources, [
-      offSet,
-      +limit,
-      ...params
-    ]);
-    return Promise.all([fetchCount, fetchCountResource]);
   }
 
   /**

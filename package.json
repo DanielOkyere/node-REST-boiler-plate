@@ -5,19 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc --reporter=lcov --reporter=text --reporter=text-summary cross-env TEMPORAL_PROJECT_NODE_ENV=test mocha -c -r esm test/**/*.test.js --timeout 12000 --exit",
-    "pretest": "npm run lint && cross-env TEMPORAL_PROJECT_NODE_ENV=test npm run migrate:reset && cross-env TEMPORAL_PROJECT_NODE_ENV=test npm run migrate:up",
-    "prestart": "cross-env TEMPORAL_PROJECT_NODE_ENV=production npm run migrate:up",
+    "pretest": "npm run lint && cross-env TEMPORAL_PROJECT_NODE_ENV=test",
+    "prestart": "cross-env TEMPORAL_PROJECT_NODE_ENV=production",
     "start": "cross-env TEMPORAL_PROJECT_NODE_ENV=production node -r esm .",
     "dev": "nodemon -r esm .",
-    "migrate": "db-migrate --migrations-dir ./app/db/migrations",
-    "migrate:up": "npm run migrate up",
-    "migrate:down": "npm run migrate down",
-    "migrate:reset": "npm run migrate reset",
-    "migrate:create": "npm run migrate create",
-    "seed:create": "npm run migrate create:seeds",
-    "seed:up": "npm run migrate up:seeds",
-    "seed:down": "npm run migrate down:seeds",
-    "seed:reset": "npm run migrate reset:seeds",
     "lint": "eslint --ext .js ./"
   },
   "keywords": [
@@ -36,7 +27,6 @@
     "nyc": "^15.1.0"
   },
   "dependencies": {
-    "@sendgrid/mail": "^7.4.6",
     "app-root-path": "^3.0.0",
     "aws-sdk": "^2.956.0",
     "axios": "^0.21.1",
@@ -48,8 +38,6 @@
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "dayjs": "^1.10.6",
-    "db-migrate": "^0.11.12",
-    "db-migrate-pg": "^1.2.2",
     "dotenv": "^10.0.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
@@ -59,10 +47,9 @@
     "joi": "^17.4.1",
     "js-sha256": "^0.9.0",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.5.2",
     "morgan": "^1.10.0",
     "nanoid": "^3.1.23",
-    "pg-monitor": "^1.4.1",
-    "pg-promise": "^10.10.2",
     "winston": "^3.3.3"
   }
 }
